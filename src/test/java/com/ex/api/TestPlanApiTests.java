@@ -15,6 +15,7 @@ public class TestPlanApiTests {
 
     @Test
     public void createTestPlan() {
+        int statusCode = 200;
         int assignedTo = 1;
         int projectId = 10;
         int suiteId = 4;
@@ -31,9 +32,34 @@ public class TestPlanApiTests {
         map.put("assignedToId", assignedTo);
         map.put("includeAll", false);
 
-
+        int actualStatusCode = (int) testPlanRequests.createTestPlanRequest(map).get("statusCde");
+        assertThat(actualStatusCode).isEqualTo(statusCode);
         String actualName = testPlanRequests.createTestPlanRequest(map).get("name").toString();
         assertThat(actualName).isEqualTo(expectedName);
+    }
+
+    @Test
+    public void createTestPlanWithWrongProjectId(){
+        int statusCode = 200;
+        int assignedTo = 1;
+        int projectId = 100;
+        int suiteId = 4;
+        String testRunName = "Custom run Name";
+        String planName = "New test plan " + new Timestamp(System.currentTimeMillis());
+        int[] casesIds = {15, 19, 20};
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("projectId", projectId);
+        map.put("planName", planName);
+        map.put("testRunName", testRunName);
+        map.put("suiteId", suiteId);
+        map.put("casesIds", casesIds);
+        map.put("assignedToId", assignedTo);
+        map.put("includeAll", false);
+
+
+        int actualStatusCode = (int) testPlanRequests.createTestPlanRequest(map).get("statusCde");
+        assertThat(actualStatusCode).isNotEqualTo(statusCode);
     }
 
     @Test

@@ -13,7 +13,7 @@ public class MilestoneRequests extends Request{
     public String updateMilestoneRequest(boolean bool, int mileId){
         String body = new MilestoneModels().updateMilestone(bool);
         Response response = postMethod
-                .withBasicParameters("/api/v2/update_milestone/"+ mileId, 200, body);
+                .withBasicParameters("/api/v2/update_milestone/"+ mileId, body);
         JSONObject jsonObject = new JSONObject(response.asString());
 
         return jsonObject.get("is_completed").toString();
@@ -35,7 +35,7 @@ public class MilestoneRequests extends Request{
 
     public Map<String, Object> createMilestoneRequest(String mileName, int dueOn, int projId){
         String body = new MilestoneModels().createMilestone(mileName, dueOn);
-        Response response = postMethod.withBasicParameters("/api/v2/add_milestone/"+ projId, 200, body);
+        Response response = postMethod.withBasicParameters("/api/v2/add_milestone/"+ projId, body);
 
         JSONObject jsonObject = new JSONObject(response.asString());
         return new HashMap<String, Object>(){

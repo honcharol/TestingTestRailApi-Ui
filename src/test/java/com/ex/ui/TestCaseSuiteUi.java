@@ -15,10 +15,10 @@ public class TestCaseSuiteUi extends BaseTest {
 
     @Test
     public void verifyIfTestCaseAppeared(String testCaseName) {
-
+//status code deleted
         String body = new TestCaseModels()
                 .createTestCaseWithoutSteps(testCaseName);
-        Response response = new PostMethod().withBasicParameters("/api/v2/add_case/2", 200, body);
+        Response response = new PostMethod().withBasicParameters("/api/v2/add_case/2", body);
 
         JSONObject jsonObject = new JSONObject(response.asString());
         String caseId = jsonObject.get("id").toString();

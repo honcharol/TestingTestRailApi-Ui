@@ -12,7 +12,7 @@ public class TestCaseRequests extends Request{
         String body = new TestCaseModels()
                 .updateTestCaseWithSteps(list);
         Response response = postMethod
-                .withBasicParameters("/api/v2/update_case/" + caseId, 200, body);
+                .withBasicParameters("/api/v2/update_case/" + caseId, body);
 
         int stepsQuantity = 0;
         JSONObject jsonObject = new JSONObject(response.asString());
@@ -37,7 +37,7 @@ public class TestCaseRequests extends Request{
         String body = new TestCaseModels()
                 .createTestCaseWithoutSteps(testCaseName);
         Response response = postMethod
-                .withBasicParameters("/api/v2/add_case/" + sectionId, 200, body);
+                .withBasicParameters("/api/v2/add_case/" + sectionId, body);
 
         JSONObject jsonObject = new JSONObject(response.asString());
         return new HashMap<String, Object>() {

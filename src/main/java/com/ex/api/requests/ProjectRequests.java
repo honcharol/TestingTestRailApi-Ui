@@ -14,7 +14,7 @@ public class ProjectRequests extends Request {
     public Map<String, Object> createProjectRequest(String projectName) {
         String body = new ProjectModels()
                 .createProjectWithoutSuiteMode(projectName);
-        Response response = postMethod.withBasicParameters("/api/v2/add_project", 200, body);
+        Response response = postMethod.withBasicParameters("/api/v2/add_project", body);
 
         JSONObject jsonObject = new JSONObject(response.asString());
         return new HashMap<String, Object>() {

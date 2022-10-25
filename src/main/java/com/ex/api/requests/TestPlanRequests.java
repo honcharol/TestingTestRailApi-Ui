@@ -13,12 +13,20 @@ public class TestPlanRequests extends Request {
     public Map<String, Object> createTestPlanRequest(Map<String, Object> map) {
         String body = new TestPlanModels().createTestPlanModel(map);
         Response response = postMethod
-                .withBasicParameters("/api/v2/add_plan/" + map.get("projectId"), 200, body);
+                .withBasicParameters("/api/v2/add_plan/" + map.get("projectId"), body);
 
         JSONObject jsonObject = new JSONObject(response.asString());
+        if(response.getStatusCode() == 200) {
+            return new HashMap<String, Object>() {
+                {
+                    put("statusCde", response.getStatusCode());
+                    put("name", jsonObject.get("name"));
+                }
+            };
+        }
         return new HashMap<String, Object>() {
             {
-                put("name", jsonObject.get("name"));
+                put("statusCde", response.getStatusCode());
             }
         };
     }
