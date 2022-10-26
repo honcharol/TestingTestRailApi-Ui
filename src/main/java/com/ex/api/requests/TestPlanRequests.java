@@ -16,19 +16,14 @@ public class TestPlanRequests extends Request {
                 .withBasicParameters("/api/v2/add_plan/" + map.get("projectId"), body);
 
         JSONObject jsonObject = new JSONObject(response.asString());
-        if(response.getStatusCode() == 200) {
-            return new HashMap<String, Object>() {
-                {
-                    put("statusCde", response.getStatusCode());
-                    put("name", jsonObject.get("name"));
-                }
-            };
+        Map<String, Object> hashMap = new HashMap<>();
+        if (response.getStatusCode() == 200) {
+            hashMap.put("statusCde", response.getStatusCode());
+            hashMap.put("name", jsonObject.get("name"));
+        } else {
+            hashMap.put("statusCde", response.getStatusCode());
         }
-        return new HashMap<String, Object>() {
-            {
-                put("statusCde", response.getStatusCode());
-            }
-        };
+        return hashMap;
     }
 
     public int deleteTestPlanRequest(String planName, int projId) {

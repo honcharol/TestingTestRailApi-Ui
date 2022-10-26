@@ -40,10 +40,12 @@ public class TestCaseRequests extends Request{
                 .withBasicParameters("/api/v2/add_case/" + sectionId, body);
 
         JSONObject jsonObject = new JSONObject(response.asString());
-        return new HashMap<String, Object>() {
-            {
-                put("name", jsonObject.get("title"));
-            }
-        };
+        Map<String,Object>objectMap = new HashMap<>();
+        if(response.getStatusCode() == 200){
+            objectMap.put("name", jsonObject.get("title"));
+        }else {
+            objectMap.put("statusCode", response.getStatusCode());
+        }
+        return objectMap;
     }
 }

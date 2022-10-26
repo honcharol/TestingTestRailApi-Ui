@@ -14,11 +14,6 @@ public class TestPlanApiTests {
     private final TestPlanRequests testPlanRequests = new TestPlanRequests();
 
     @Test
-    public void tttt(){
-
-    }
-
-    @Test
     public void createTestPlan() {
         int statusCode = 200;
         int assignedTo = 1;
@@ -44,7 +39,7 @@ public class TestPlanApiTests {
     }
 
     @Test
-    public void createTestPlanWithWrongProjectId(){
+    public void unableCreateTestPlanWithWrongProjectId(){
         int statusCode = 200;
         int assignedTo = 1;
         int projectId = 100;

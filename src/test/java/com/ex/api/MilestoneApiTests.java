@@ -1,10 +1,11 @@
 package com.ex.api;
 
 import com.ex.api.requests.MilestoneRequests;
-import com.ex.api.requests.ProjectRequests;
 import org.testng.annotations.Test;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,14 +14,33 @@ public class MilestoneApiTests {
     private final MilestoneRequests milestoneRequests = new MilestoneRequests();
 
     @Test
+    public void unableCreateMilestoneWithWrongProjectId(){
+        int projectId = 100;
+        int dueOn = 232148632;
+        String milestoneName = "New milestone " + new Timestamp(System.currentTimeMillis());
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("projId", projectId);
+        map.put("dueOn", dueOn);
+        map.put("milestoneName", milestoneName);
+
+        int actualStatusCode = (int) milestoneRequests.createMilestoneRequest(map).get("statusCode");
+        assertThat(actualStatusCode).isNotEqualTo(200);
+    }
+
+    @Test
     public void createMilestone() {
         int projectId = 14;
         int dueOn = 232148632;
         String milestoneName = "New milestone " + new Timestamp(System.currentTimeMillis());
 
-        String actualMilestoneName = milestoneRequests.createMilestoneRequest(milestoneName, dueOn, projectId).get("name").toString();
-        assertThat(milestoneName).isEqualTo(actualMilestoneName);
+        Map<String, Object> map = new HashMap<>();
+        map.put("projId", projectId);
+        map.put("dueOn", dueOn);
+        map.put("milestoneName", milestoneName);
 
+        String actualMilestoneName = milestoneRequests.createMilestoneRequest(map).get("name").toString();
+        assertThat(milestoneName).isEqualTo(actualMilestoneName);
     }
 
     @Test
@@ -36,9 +56,13 @@ public class MilestoneApiTests {
     @Test
     public void updateMilestone() {
         boolean isCompleted = true;
-        int milestoneId = 5;
+        int milestoneId = 9;
 
-        String actualResult = milestoneRequests.updateMilestoneRequest(isCompleted, milestoneId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("isCompleted", isCompleted);
+        map.put("milestoneId", milestoneId);
+
+        String actualResult = milestoneRequests.updateMilestoneRequest(map);
         assertThat(actualResult).isEqualTo(String.valueOf(isCompleted));
     }
 }
