@@ -39,7 +39,7 @@ public class TestPlanApiTests {
     }
 
     @Test
-    public void createTestPlanWithWrongProjectId(){
+    public void unableCreateTestPlanWithWrongProjectId(){
         int statusCode = 200;
         int assignedTo = 1;
         int projectId = 100;

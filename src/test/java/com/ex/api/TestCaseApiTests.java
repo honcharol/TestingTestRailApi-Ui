@@ -15,18 +15,30 @@ public class TestCaseApiTests {
     private final TestCaseRequests testCaseRequests = new TestCaseRequests();
 
     @Test
-    public void createNewTestCaseWithoutSteps() {
+    public void unableCreateTestCaseWithWrongName(){
         int sectionId = 9;
+        String expectedCaseName = "";
+
+        int actualStatusCode = (int) testCaseRequests
+                .createTestCaseRequest(expectedCaseName, sectionId).get("statusCode");
+        assertThat(actualStatusCode).isNotEqualTo(200);
+    }
+
+    @Test
+    public void createNewTestCaseWithoutSteps() {
+        int sectionId = 11;
         String expectedCaseName = "New test case" + new Timestamp(System.currentTimeMillis());
-        String actualCaseName = testCaseRequests.createTestCaseRequest(expectedCaseName, sectionId).get("name").toString();
+
+        String actualCaseName = testCaseRequests
+                .createTestCaseRequest(expectedCaseName, sectionId).get("name").toString();
         assertThat(actualCaseName).isEqualTo(expectedCaseName);
 
     }
 
     @Test
     public void updateTestCaseAddSteps() {
-        int expectedStepsQuantity = 7;
-        int testCaseId = 23;
+        int expectedStepsQuantity = 5;
+        int testCaseId = 27;
         ArrayList<Map<String, String>> list = new ArrayList<>();
         for (int i=0; i<expectedStepsQuantity; i++){
             Map<String, String> map = new HashMap<>();
