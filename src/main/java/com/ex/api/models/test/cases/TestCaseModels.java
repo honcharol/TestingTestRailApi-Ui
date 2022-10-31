@@ -19,7 +19,6 @@ public class TestCaseModels {
                 .setRefs("RF-1, RF-2"));
     }
 
-
     public String updateTestCaseWithSteps(ArrayList<Map<String, String>> arrayLists) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<CustomStepsSeparated> customStepsSeparated = new ArrayList<>();
@@ -30,7 +29,6 @@ public class TestCaseModels {
                     .setAdditionalInfo(map.get("additionalInfo"))
                     .setExpected(map.get("expected")));
         }
-
         return gson.toJson(new CreateTestCase()
                 .setTypeId(1)
                 .setPriorityId(3)

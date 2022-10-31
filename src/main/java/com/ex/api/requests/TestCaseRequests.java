@@ -11,25 +11,20 @@ public class TestCaseRequests extends Request{
     public int updateTestCaseAddStepsRequest(ArrayList<Map<String, String>> list, int caseId) {
         String body = new TestCaseModels()
                 .updateTestCaseWithSteps(list);
-        Response response = postMethod
+        postMethod
                 .withBasicParameters("/api/v2/update_case/" + caseId, body);
 
         int stepsQuantity = 0;
-        JSONObject jsonObject = new JSONObject(response.asString());
-        String stepsListJson;
+        JSONObject jsonObject = new JSONObject(body);
         List<String> stringList;
 
-        boolean stepsQuantityInWeb = true;
         try {
             jsonObject.get("custom_steps_separated");
-        } catch (Exception e) {
-            stepsQuantityInWeb = false;
-        }
-        if (stepsQuantityInWeb) {
-            stepsListJson = jsonObject.get("custom_steps_separated").toString();
-            stringList = Arrays.asList(stepsListJson.split("},"));
+            stringList = Arrays.asList(jsonObject.get("custom_steps_separated").toString().split("},"));
             stepsQuantity = stringList.size();
-        } else stepsQuantity = 0;
+        } catch (Exception e) {
+            e.getMessage();
+        }
         return stepsQuantity;
     }
 

@@ -21,7 +21,7 @@ public class ProjectApiTests {
 
     @Test
     public void createNewProjectWithModel() {
-        String expectedName = "some name for testing" + new Timestamp(System.currentTimeMillis());
+        String expectedName = "Some name for testing" + new Timestamp(System.currentTimeMillis());
         String actualName = projectRequests.createProjectRequest(expectedName).get("name").toString();
         assertThat(actualName).isEqualTo(expectedName);
     }

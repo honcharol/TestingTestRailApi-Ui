@@ -1,6 +1,5 @@
 package com.ex.api.methods;
 
-import com.ex.PropertyReader;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

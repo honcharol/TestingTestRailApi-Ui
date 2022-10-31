@@ -10,10 +10,10 @@ public class ProjectModels {
     public String createProjectWithoutSuiteMode(String name){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        CreateProject createProject = new CreateProject();
-        createProject.setName(name);
-        createProject.setAnnouncement("announcement for testing");
-        createProject.setShowAnnouncement(true);
-        return gson.toJson(createProject);
+        return gson.toJson(new CreateProject()
+        .setName(name)
+        .setAnnouncement("announcement for testing")
+        .setSuiteMode(1)
+        .setShowAnnouncement(true));
     }
 }
