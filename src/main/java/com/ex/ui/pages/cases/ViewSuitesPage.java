@@ -11,10 +11,10 @@ public class ViewSuitesPage extends BasePage {
         super(webDriver);
     }
 
-    public TestCaseMethodsPage clickOnCase(String caseId){
+    public TestCaseMethods clickOnCase(String caseId){
         By selectedCase =
                 By.xpath("//tr[contains(@id,'row-" + caseId +"')]//td/a/span[@class='title']");
         findElementCustom(webDriver, selectedCase).click();
-        return new TestCaseMethodsPage(webDriver);
+        return new TestCaseMethods(webDriver);
     }
 }
