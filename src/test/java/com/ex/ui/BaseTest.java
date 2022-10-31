@@ -1,6 +1,5 @@
 package com.ex.ui;
 
-import com.ex.PropertyReader;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

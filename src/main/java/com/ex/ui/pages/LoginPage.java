@@ -1,7 +1,5 @@
-package com.ex.ui.pages.cases;
+package com.ex.ui.pages;
 
-import com.ex.ui.pages.BasePage;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,15 +12,11 @@ public class LoginPage extends BasePage {
         super(webDriver, url);
     }
 
-    public LoginPage inputEmail(String email){
-        findElementCustom(webDriver, emailField).sendKeys(email);
-        return this;
-    }
-
-    public LoginPage inputPassword(String password){
-        findElementCustom(webDriver, passField).sendKeys(password);
-        return this;
-    }
+   public LoginPage login (){
+       findElementCustom(webDriver, emailField).sendKeys(pr.prop("email"));
+       findElementCustom(webDriver, passField).sendKeys(pr.prop("password"));
+       return this;
+   }
     
     public <T> T clickOnLoginButton(T type) {
         findElementCustom(webDriver, loginButton).click();

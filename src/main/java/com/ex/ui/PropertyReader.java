@@ -1,4 +1,4 @@
-package com.ex;
+package com.ex.ui;
 
 import java.io.IOException;
 import java.io.InputStream;
