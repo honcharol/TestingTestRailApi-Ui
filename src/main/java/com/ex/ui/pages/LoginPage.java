@@ -12,9 +12,9 @@ public class LoginPage extends BasePage {
         super(webDriver, url);
     }
 
-   public LoginPage login (){
-       findElementCustom(webDriver, emailField).sendKeys(pr.prop("email"));
-       findElementCustom(webDriver, passField).sendKeys(pr.prop("password"));
+   public LoginPage fillCredential(String email, String password){
+       findElementCustom(webDriver, emailField).sendKeys(email);
+       findElementCustom(webDriver, passField).sendKeys(password);
        return this;
    }
     

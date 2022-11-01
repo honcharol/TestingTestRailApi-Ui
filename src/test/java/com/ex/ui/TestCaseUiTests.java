@@ -1,70 +1,64 @@
 package com.ex.ui;
 
-import com.ex.api.methods.PostMethod;
-import com.ex.api.models.test.cases.TestCaseModels;
 import com.ex.ui.pages.LoginPage;
-import com.ex.ui.pages.cases.TestCaseMethodsPage;
+import com.ex.ui.pages.cases.AddTestCasePage;
+import com.ex.ui.pages.cases.EditTestCasePage;
+import com.ex.ui.pages.cases.ViewCasesPage;
 import com.ex.ui.pages.cases.ViewSuitesPage;
-import io.restassured.response.Response;
-import org.json.JSONObject;
 import org.testng.annotations.Test;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestCaseUiTests extends BaseTest {
 
     @Test
-    public void addTestCase(){
-        int suiteId = 8;
+    public void updateTestCaseByAddingSteps(){
+        String testCaseId = "13";
+        String sectionId = "1";
+
+        int existingStepQuantity =
+                new LoginPage(webDriver, pr.prop("editTestCaseUri").concat(testCaseId+"/"+sectionId))
+                .fillCredential(pr.prop("email"), pr.prop("password"))
+                .clickOnLoginButton(new ViewCasesPage(webDriver))
+                .getTestCaseQuantity();
+        int newStepQuantity =
+                new EditTestCasePage(webDriver)
+                .clickOnAddStep()
+                .clickOnSaveTestCaseButton()
+                .getTestCaseQuantity();
+
+        assertThat(newStepQuantity).isGreaterThan(existingStepQuantity);
 
     }
 
     @Test
-    public void verifyIfTestCaseAppeared() {
-        String testCaseName = "New test case" + new Timestamp(System.currentTimeMillis());
-        String body = new TestCaseModels()
-                .createTestCaseWithoutSteps(testCaseName);
-        Response response = new PostMethod().withBasicParameters("/api/v2/add_case/10", body);
+    public void createDefaultTestCase() {
+        String testCaseSuite = String.valueOf(3);
+        String testCaseName = "Some test case - " + System.currentTimeMillis();
+        String testCasesTab = "//a[@id='navigation-suites'][contains(.,'Test Cases')]";
 
-        JSONObject jsonObject = new JSONObject(response.asString());
-        String suiteId = jsonObject.get("suite_id").toString();
-        String caseId = jsonObject.get("id").toString();
+        boolean actualTestCaseName = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
+                .fillCredential(pr.prop("email"), pr.prop("password"))
+                .clickOnLoginButton(new AddTestCasePage(webDriver))
+                .enterTestCaseName(testCaseName)
+                .clickOnAddCaseButton()
+                .clickOnTab(new ViewSuitesPage(webDriver), testCasesTab)
+                .verifyIfExistTestCaseInList(testCaseName);
 
-        new LoginPage(webDriver, pr.prop("uriSuiteCases").concat(suiteId))
-                .login()
-                .clickOnLoginButton(new ViewSuitesPage(webDriver))
-                .clickOnCase(caseId)
-                .assertIfCaseStepsAreDisplayed();
+        assertThat(actualTestCaseName).isEqualTo(true);
     }
 
     @Test
-    public void verifyIfCountOfStepsUpdated() {
-        String testCaseId = "28";
-        TestCaseMethodsPage caseViewPage = new LoginPage(webDriver, pr.prop("uriCases").concat(testCaseId))
-                .login()
-                .clickOnLoginButton(new TestCaseMethodsPage(webDriver));
-        int initialContSteps = caseViewPage.getCountSteps();
+    public void unableToCreateTestCaseWithEmptyTitle(){
+        String testCaseSuite = "3";
+        String errorMassage = "Field Title is a required field.";
 
-        int expectedStepsQuantity = 4;
-        ArrayList<Map<String, String>> list = new ArrayList<>();
-        for (int i = 0; i < expectedStepsQuantity; i++) {
-            Map<String, String> map = new HashMap<>();
-            map.put("content", "Step " + (i + 1));
-            map.put("additionalInfo", "Additional info " + (i + 1));
-            map.put("expected", "Expected result " + (i + 1));
-            list.add(map);
-        }
+        String actualMassage = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
+                .fillCredential(pr.prop("email"), pr.prop("password"))
+                .clickOnLoginButton(new AddTestCasePage(webDriver))
+                .clickOnAddCaseButton()
+                .verifyIfTestCasesErrorMassageIsDisplayed();
 
-        String body = new TestCaseModels().updateTestCaseWithSteps(list);
-        new PostMethod()
-                .withBasicParameters("/api/v2/update_case/" + testCaseId, body);
-        webDriver.navigate().refresh();
-        assertThat(caseViewPage.getCountSteps()).isGreaterThan(initialContSteps);
+        assertThat(actualMassage).isEqualTo(errorMassage);
     }
-
 }

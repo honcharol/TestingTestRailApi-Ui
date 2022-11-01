@@ -5,23 +5,29 @@ import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestCaseMethodsPage extends BasePage {
-    private final By stepsLocator = By.xpath("//span[@class='field-title-inner'][contains(.,'Steps')]");
-    private final By stepsListLocator = By.xpath("//tr[@class='not-shared ']");
+public class TestCaseMethods extends BasePage {
+    private final By stepsLocator = By
+            .xpath("//span[@class='field-title-inner'][contains(.,'Steps')]");
+    private final By stepsListLocator = By
+            .xpath("//tr[@class='not-shared ']");
 
-    public TestCaseMethodsPage(WebDriver webDriver) {
+
+    public TestCaseMethods(WebDriver webDriver) {
         super(webDriver);
     }
 
     public void assertIfCaseStepsAreDisplayed() {
         assertThat(stepsLocator.toString().equals("Steps"));
     }
+
+
 
     public int getCountSteps() {
         int stepsQuantity = 0;
@@ -33,7 +39,7 @@ public class TestCaseMethodsPage extends BasePage {
         return stepsQuantity;
     }
 
-    public TestCaseMethodsPage getStepsApi(Response getResponse) {
+    public TestCaseMethods getStepsApi(Response getResponse) {
         int stepsQuantity = 0;
         JSONObject jsonObject = new JSONObject(getResponse.asString());
         String stepsListJson;
@@ -55,7 +61,7 @@ public class TestCaseMethodsPage extends BasePage {
     }
 
 
-    public TestCaseMethodsPage assertStepAddedToCaseApi(Response postResponse, int countStep) {
+    public TestCaseMethods assertStepAddedToCaseApi(Response postResponse, int countStep) {
         JSONObject jsonObject = new JSONObject(postResponse.asString());
         String stepsListJson = jsonObject.get("custom_steps_separated").toString();
         List<String> stringList = Arrays.asList(stepsListJson.split("},"));
