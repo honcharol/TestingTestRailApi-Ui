@@ -2,7 +2,7 @@ package com.ex.ui;
 
 import com.ex.ui.pages.LoginPage;
 import com.ex.ui.pages.cases.AddTestCasePage;
-import com.ex.ui.pages.cases.TestCaseMethods;
+import com.ex.ui.pages.cases.ViewSuitesPage;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,16 +10,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestCaseUiTests extends BaseTest {
 
     @Test
-    public void createTestCaseWithoutSteps() {
+    public void createDefaultTestCase() {
         String testCaseSuite = String.valueOf(3);
         String testCaseName = "Some test case - " + System.currentTimeMillis();
-        new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
+        String testCasesTab = "//a[@id='navigation-suites'][contains(.,'Test Cases')]";
+
+        boolean actualTestCaseName = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new AddTestCasePage(webDriver))
-                .addTestCaseName(testCaseName)
-                .clickOnAddCaseButton();
-        boolean actualTestCaseName = new TestCaseMethods(webDriver)
-                .verifyByNameIfExistTestCase(testCaseName);
+                .enterTestCaseName(testCaseName)
+                .clickOnAddCaseButton()
+                .clickOnTab(new ViewSuitesPage(webDriver), testCasesTab)
+                .verifyIfExistTestCaseInList(testCaseName);
 
         assertThat(actualTestCaseName).isEqualTo(true);
     }
@@ -28,13 +30,13 @@ public class TestCaseUiTests extends BaseTest {
     public void unableToCreateTestCaseWithEmptyTitle(){
         String testCaseSuite = String.valueOf(3);
         String errorMassage = "Field Title is a required field.";
-        new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
+
+        String actualMassage = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new AddTestCasePage(webDriver))
-                .clickOnAddCaseButton();
-
-        String actualMassage = new TestCaseMethods(webDriver)
+                .clickOnAddCaseButton()
                 .verifyIfTestCasesErrorMassageIsDisplayed();
+
         assertThat(actualMassage).isEqualTo(errorMassage);
     }
 }

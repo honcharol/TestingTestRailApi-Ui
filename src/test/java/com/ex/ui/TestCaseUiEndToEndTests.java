@@ -30,7 +30,7 @@ public class TestCaseUiEndToEndTests extends BaseTest {
         String caseId = jsonObject.get("id").toString();
 
         new LoginPage(webDriver, pr.prop("viewSuiteCasesUri").concat(suiteId))
-                .fillCredential()
+                .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new ViewSuitesPage(webDriver))
                 .clickOnCase(caseId)
                 .assertIfCaseStepsAreDisplayed();
@@ -40,7 +40,7 @@ public class TestCaseUiEndToEndTests extends BaseTest {
     public void verifyIfCountOfStepsUpdated() {
         String testCaseId = "28";
         TestCaseMethods caseViewPage = new LoginPage(webDriver, pr.prop("viewTestCasesUri").concat(testCaseId))
-                .fillCredential()
+                .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new TestCaseMethods(webDriver));
         int initialContSteps = caseViewPage.getCountSteps();
 

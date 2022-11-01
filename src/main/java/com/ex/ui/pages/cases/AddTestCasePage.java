@@ -3,9 +3,6 @@ package com.ex.ui.pages.cases;
 import com.ex.ui.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class AddTestCasePage extends BasePage {
 
@@ -13,19 +10,25 @@ public class AddTestCasePage extends BasePage {
             .xpath("//input[@id='title']");
     private final By addCaseButton = By
             .xpath("//button[@type='submit'][contains(.,'Add Test Case')]");
+    private final By errorMassage = By
+            .xpath("//div[@class='message message-error'][contains(.,'Field Title is a required field.')]");
 
 
     public AddTestCasePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddTestCasePage addTestCaseName(String name){
-        findElementCustom(webDriver,testCaseNameRow).sendKeys(name);
+    public AddTestCasePage enterTestCaseName(String name) {
+        findElementCustom(webDriver, testCaseNameRow).sendKeys(name);
         return this;
     }
 
-    public AddTestCasePage clickOnAddCaseButton(){
+    public AddTestCasePage clickOnAddCaseButton() {
         findElementCustom(webDriver, addCaseButton).click();
         return this;
+    }
+
+    public String verifyIfTestCasesErrorMassageIsDisplayed(){
+        return findElementCustom(webDriver, errorMassage).getText();
     }
 }

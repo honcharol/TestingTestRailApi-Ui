@@ -17,12 +17,7 @@ public class TestCaseMethods extends BasePage {
             .xpath("//span[@class='field-title-inner'][contains(.,'Steps')]");
     private final By stepsListLocator = By
             .xpath("//tr[@class='not-shared ']");
-    private final By testsCasesList = By
-            .xpath("//a[@rel='keep-get']/span[@class='title' ]");
-    private final By testCasesTab = By
-            .xpath("//li[@class='header-menu-item header-menu-item-selected'][contains(.,'Test Cases')]");
-    private final By errorMassage = By
-            .xpath("//div[@class='message message-error'][contains(.,'Field Title is a required field.')]");
+
 
     public TestCaseMethods(WebDriver webDriver) {
         super(webDriver);
@@ -32,20 +27,7 @@ public class TestCaseMethods extends BasePage {
         assertThat(stepsLocator.toString().equals("Steps"));
     }
 
-    public String verifyIfTestCasesErrorMassageIsDisplayed(){
-        return findElementCustom(webDriver, errorMassage).getText();
-    }
 
-    public boolean verifyByNameIfExistTestCase(String name){
-        findElementCustom(webDriver, testCasesTab).click();
-        boolean ifExistName = false;
-        List<WebElement> webElement = findElementsCustom(webDriver, testsCasesList);
-        for(WebElement w: webElement){
-            if(w.getText().contains(name)){
-                ifExistName = true;
-            }
-        }return ifExistName;
-    }
 
     public int getCountSteps() {
         int stepsQuantity = 0;

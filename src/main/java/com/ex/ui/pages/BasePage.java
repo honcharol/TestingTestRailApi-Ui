@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 public abstract class BasePage extends WebHelpers {
 
     protected WebDriver webDriver;
-    protected PropertyReader pr = new PropertyReader();
 
     public BasePage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -21,8 +20,8 @@ public abstract class BasePage extends WebHelpers {
         PageFactory.initElements(webDriver, this);
     }
 
-    <T> T clickButton(T type, String buttonName, String locator) {
-        findElementCustom(webDriver, By.xpath(String.format(locator, buttonName))).click();
+    public <T> T clickOnTab(T type, String locator) {
+        findElementCustom(webDriver, By.xpath(locator)).click();
         return type;
     }
 
