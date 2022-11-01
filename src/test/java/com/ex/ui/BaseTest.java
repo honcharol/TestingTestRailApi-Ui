@@ -1,5 +1,6 @@
 package com.ex.ui;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -11,7 +12,7 @@ public class BaseTest  {
     @BeforeClass
     public void setUp(){
         webDriver = WebDriverManagerClass.getWebDriver();
-        webDriver.manage().window().maximize();
+        webDriver.manage().window().setSize(new Dimension(1920, 1080));
     }
 
     @AfterClass

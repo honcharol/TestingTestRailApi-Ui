@@ -12,7 +12,7 @@ import java.util.List;
 
 public class WebHelpers {
 
-    long timeOut = 10L;
+    long timeOut = 5L;
     protected WebElement findElementCustom (WebDriver webDriver, By locator) {
         return new WebDriverWait(webDriver, Duration.ofSeconds(timeOut))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -30,6 +30,6 @@ public class WebHelpers {
 
     public void scrollToElement (WebDriver webDriver, WebElement webElement) {
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true)", webElement);
-
     }
+
 }
