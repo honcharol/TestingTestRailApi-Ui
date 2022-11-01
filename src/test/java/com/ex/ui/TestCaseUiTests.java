@@ -20,12 +20,12 @@ public class TestCaseUiTests extends BaseTest {
                 new LoginPage(webDriver, pr.prop("editTestCaseUri").concat(testCaseId+"/"+sectionId))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new ViewCasesPage(webDriver))
-                .getTestCaseQuantity();
+                .getStepQuantity();
         int newStepQuantity =
                 new EditTestCasePage(webDriver)
                 .clickOnAddStep()
                 .clickOnSaveTestCaseButton()
-                .getTestCaseQuantity();
+                .getStepQuantity();
 
         assertThat(newStepQuantity).isGreaterThan(existingStepQuantity);
 

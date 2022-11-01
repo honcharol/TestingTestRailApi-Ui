@@ -5,7 +5,6 @@ import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +25,6 @@ public class TestCaseMethods extends BasePage {
     public void assertIfCaseStepsAreDisplayed() {
         assertThat(stepsLocator.toString().equals("Steps"));
     }
-
 
 
     public int getCountSteps() {

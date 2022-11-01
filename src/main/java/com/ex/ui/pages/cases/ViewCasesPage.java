@@ -15,7 +15,7 @@ public class ViewCasesPage extends BasePage {
         super(webDriver);
     }
 
-    public int getTestCaseQuantity(){
+    public int getStepQuantity(){
         int stepsQuantity = 0;
         List<WebElement> stepList;
         try {
