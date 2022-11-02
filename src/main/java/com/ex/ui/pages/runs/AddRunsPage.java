@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.Random;
 
-public class AddTestRunsPage extends BasePage {
+public class AddRunsPage extends BasePage {
 
     private final By testCasesList = By
             .xpath("//td[@class='checkbox']");
@@ -23,41 +23,45 @@ public class AddTestRunsPage extends BasePage {
     private final By addTestRunButton = By
             .xpath("//button[@id='accept']");
 
-    public AddTestRunsPage(WebDriver webDriver) {
+    public AddRunsPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddTestRunsPage enterTestRunName(String name){
+    public AddRunsPage enterTestRunName(String name) {
         findElementCustom(webDriver, nameRow).clear();
         findElementCustom(webDriver, nameRow).sendKeys(name);
         return this;
     }
 
-    public AddTestRunsPage clickOnSelectSpecificTestCasesRadioButton(){
+    public AddRunsPage clickOnSelectSpecificTestCasesRadioButton() {
         findElementCustom(webDriver, selectTestCasesRadioButton).click();
         return this;
     }
 
-    public AddTestRunsPage clickOnChangeSelection(){
+    public AddRunsPage clickOnChangeSelection() {
         findElementCustom(webDriver, changeSelection).click();
         return this;
     }
 
-    public AddTestRunsPage clickOnRandomTestCase(){
+    public AddRunsPage clickOnRandomTestCases() {
         Random rnd = new Random();
-        List<WebElement> listCases = findElementsCustom(webDriver,testCasesList);
+        List<WebElement> listCases = findElementsCustom(webDriver, testCasesList);
 
-        int randomTestCaseIndex = rnd.nextInt(listCases.size()-1);
-        listCases.get(randomTestCaseIndex).click();
+        int randomNumberOfCases = rnd.nextInt(2 + 1) + 2;
+        for (int i = 0; i < randomNumberOfCases; i++) {
+            int index = rnd.nextInt(listCases.size());
+            listCases.get(index).click();
+            listCases.remove(index);
+        }
         return this;
     }
 
-    public AddTestRunsPage clickOnOkButton(){
+    public AddRunsPage clickOnOkButton() {
         findElementCustom(webDriver, okButton).click();
         return this;
     }
 
-    public ViewRunsPage clickOnAddTestRunButton(){
+    public ViewRunsPage clickOnAddTestRunButton() {
         findElementCustom(webDriver, addTestRunButton).click();
         return new ViewRunsPage(webDriver);
     }

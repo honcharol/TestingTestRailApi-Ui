@@ -4,7 +4,7 @@ import com.ex.ui.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AddTestCasePage extends BasePage {
+public class AddCasePage extends BasePage {
 
     private final By testCaseNameRow = By
             .xpath("//input[@id='title']");
@@ -14,16 +14,16 @@ public class AddTestCasePage extends BasePage {
             .xpath("//div[@class='message message-error'][contains(.,'Field Title is a required field.')]");
 
 
-    public AddTestCasePage(WebDriver webDriver) {
+    public AddCasePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddTestCasePage enterTestCaseName(String name) {
+    public AddCasePage enterTestCaseName(String name) {
         findElementCustom(webDriver, testCaseNameRow).sendKeys(name);
         return this;
     }
 
-    public AddTestCasePage clickOnAddCaseButton() {
+    public AddCasePage clickOnAddCaseButton() {
         findElementCustom(webDriver, addCaseButton).click();
         return this;
     }

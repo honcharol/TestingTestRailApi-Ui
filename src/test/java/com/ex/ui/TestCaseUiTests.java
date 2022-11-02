@@ -1,8 +1,8 @@
 package com.ex.ui;
 
 import com.ex.ui.pages.LoginPage;
-import com.ex.ui.pages.cases.AddTestCasePage;
-import com.ex.ui.pages.cases.EditTestCasePage;
+import com.ex.ui.pages.cases.AddCasePage;
+import com.ex.ui.pages.cases.EditCasesPage;
 import com.ex.ui.pages.cases.ViewCasesPage;
 import com.ex.ui.pages.cases.ViewSuitesPage;
 import org.testng.annotations.Test;
@@ -22,7 +22,7 @@ public class TestCaseUiTests extends BaseTest {
                 .clickOnLoginButton(new ViewCasesPage(webDriver))
                 .getStepQuantity();
         int newStepQuantity =
-                new EditTestCasePage(webDriver)
+                new EditCasesPage(webDriver)
                 .clickOnAddStep()
                 .clickOnSaveTestCaseButton()
                 .getStepQuantity();
@@ -38,7 +38,7 @@ public class TestCaseUiTests extends BaseTest {
 
         boolean actualTestCaseName = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
-                .clickOnLoginButton(new AddTestCasePage(webDriver))
+                .clickOnLoginButton(new AddCasePage(webDriver))
                 .enterTestCaseName(testCaseName)
                 .clickOnAddCaseButton()
                 .clickOnTab(new ViewSuitesPage(webDriver), testCasesTab)
@@ -54,7 +54,7 @@ public class TestCaseUiTests extends BaseTest {
 
         String actualMassage = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
-                .clickOnLoginButton(new AddTestCasePage(webDriver))
+                .clickOnLoginButton(new AddCasePage(webDriver))
                 .clickOnAddCaseButton()
                 .verifyIfTestCasesErrorMassageIsDisplayed();
 

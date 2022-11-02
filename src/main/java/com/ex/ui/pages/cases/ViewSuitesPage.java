@@ -17,9 +17,9 @@ public class ViewSuitesPage extends BasePage {
     }
 
     public String getActualName(String caseId) {
-        By selectedCase =
+        By specificTestCase =
                 By.xpath("//tr[contains(@id,'row-" + caseId + "')]//td/a/span[@class='title']");
-        return findElementCustom(webDriver, selectedCase).getText();
+        return findElementCustom(webDriver, specificTestCase).getText();
     }
 
     public boolean verifyIfExistTestCaseInList(String name) {
