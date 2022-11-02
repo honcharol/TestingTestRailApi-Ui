@@ -16,20 +16,20 @@ public class ViewSuitesPage extends BasePage {
         super(webDriver);
     }
 
-    public TestCaseMethods clickOnCase(String caseId){
+    public String getActualName(String caseId) {
         By selectedCase =
-                By.xpath("//tr[contains(@id,'row-" + caseId +"')]//td/a/span[@class='title']");
-        findElementCustom(webDriver, selectedCase).click();
-        return new TestCaseMethods(webDriver);
+                By.xpath("//tr[contains(@id,'row-" + caseId + "')]//td/a/span[@class='title']");
+        return findElementCustom(webDriver, selectedCase).getText();
     }
 
-    public boolean verifyIfExistTestCaseInList(String name){
+    public boolean verifyIfExistTestCaseInList(String name) {
         boolean ifExistName = false;
         List<WebElement> webElement = findElementsCustom(webDriver, testsCasesList);
-        for(WebElement w: webElement){
-            if(w.getText().contains(name)){
+        for (WebElement w : webElement) {
+            if (w.getText().contains(name)) {
                 ifExistName = true;
             }
-        }return ifExistName;
+        }
+        return ifExistName;
     }
 }

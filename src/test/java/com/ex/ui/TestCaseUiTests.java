@@ -28,7 +28,6 @@ public class TestCaseUiTests extends BaseTest {
                 .getStepQuantity();
 
         assertThat(newStepQuantity).isGreaterThan(existingStepQuantity);
-
     }
 
     @Test

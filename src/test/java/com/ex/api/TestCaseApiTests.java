@@ -27,6 +27,7 @@ public class TestCaseApiTests {
     @Test
     public void createNewTestCaseWithoutSteps() {
         int sectionId = 1;
+
         String expectedCaseName = "New test case" + new Timestamp(System.currentTimeMillis());
 
         String actualCaseName = testCaseRequests
@@ -39,6 +40,7 @@ public class TestCaseApiTests {
     public void updateTestCaseAddSteps() {
         int expectedStepsQuantity = 3;
         int testCaseId = 4;
+
         ArrayList<Map<String, String>> list = new ArrayList<>();
         for (int i=0; i<expectedStepsQuantity; i++){
             Map<String, String> map = new HashMap<>();
