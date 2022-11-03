@@ -1,4 +1,5 @@
 package com.ex.ui;
+
 import com.ex.ui.pages.LoginPage;
 import com.ex.ui.pages.runs.AddRunsPage;
 import com.ex.ui.pages.runs.OverviewRunsPage;
@@ -7,10 +8,10 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class TestRunsUiTests extends BaseTest{
+public class TestRunsUiTests extends BaseTest {
 
     @Test
-    public void createTestRunWithSpecificTestCase(){
+    public void createTestRunWithSpecificTestCase() {
         String suiteId = "3";
         String successMassage = "Successfully added the new test run.";
         String testRunName = "Some Test Run: " + System.currentTimeMillis();
@@ -30,10 +31,10 @@ public class TestRunsUiTests extends BaseTest{
     }
 
     @Test
-    public void addResultToTestCase(){
+    public void addResultToTestCase() {
         String projectId = "6";
 
-        new LoginPage(webDriver, pr.prop("overviewRuns").concat(projectId))
+        String nameOfTestStatus = new LoginPage(webDriver, pr.prop("overviewRuns").concat(projectId))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new OverviewRunsPage(webDriver))
                 .clickOnRandomTestRun()
@@ -41,7 +42,10 @@ public class TestRunsUiTests extends BaseTest{
                 .clickAddResultButton()
                 .clickOnStatusDropDown()
                 .clickOnRandomStatus()
-                .clickOnAddResult();
+                .clickOnAddResult()
+                .nameOfTestStatus();
+
+        assertThat(nameOfTestStatus).isNotEqualTo("Untested");
 
     }
 }

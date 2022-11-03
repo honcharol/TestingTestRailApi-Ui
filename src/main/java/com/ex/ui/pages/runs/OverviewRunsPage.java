@@ -17,7 +17,7 @@ public class OverviewRunsPage extends BasePage {
         super(webDriver);
     }
 
-    public ViewRunsPage clickOnRandomTestRun(){
+    public ViewRunsPage clickOnRandomTestRun() {
         Random rnd = new Random();
         List<WebElement> webElements = findElementsCustom(webDriver, testRunList);
         int index = rnd.nextInt(webElements.size());

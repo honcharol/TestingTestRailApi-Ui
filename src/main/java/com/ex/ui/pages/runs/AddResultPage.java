@@ -21,12 +21,12 @@ public class AddResultPage extends BasePage {
         super(webDriver);
     }
 
-    public AddResultPage clickOnStatusDropDown(){
-        findElementCustom(webDriver, statusDropDown).click();
+    public AddResultPage clickOnStatusDropDown() {
+        waitForElementToBeClickable(webDriver, statusDropDown).click();
         return this;
     }
 
-    public AddResultPage clickOnRandomStatus(){
+    public AddResultPage clickOnRandomStatus() {
         Random rnd = new Random();
         List<WebElement> webElements = findElementsCustom(webDriver, statusList);
         int index = rnd.nextInt(webElements.size());
@@ -34,7 +34,8 @@ public class AddResultPage extends BasePage {
         return this;
     }
 
-    public void clickOnAddResult(){
+    public ViewTestsPage clickOnAddResult() {
         findElementCustom(webDriver, addResultButton).click();
+        return new ViewTestsPage(webDriver);
     }
 }

@@ -13,21 +13,22 @@ public class ViewRunsPage extends BasePage {
     private final By successMassage = By
             .xpath("//div[@class='message message-success'][contains(.,'Successfully added')]");
     private final By testCasesList = By
-            .xpath("//tr[contains(@id,'row-')]/td[@class='id']/a");
+            .xpath("//tr[contains(@id,'row-')]/td[@class='id']/a[@class='link-noline']");
 
     public ViewRunsPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public String getSuccessMassage(){
+    public String getSuccessMassage() {
         return findElementCustom(webDriver, successMassage).getText();
     }
 
-    public ViewTestsPage clickOnRandomTestCase(){
+    public ViewTestsPage clickOnRandomTestCase() {
         Random rnd = new Random();
         List<WebElement> webElements = findElementsCustom(webDriver, testCasesList);
         int index = rnd.nextInt(webElements.size());
         webElements.get(index).click();
+
         return new ViewTestsPage(webDriver);
     }
 }
