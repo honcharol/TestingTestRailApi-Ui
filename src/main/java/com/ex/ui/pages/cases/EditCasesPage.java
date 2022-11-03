@@ -4,18 +4,18 @@ import com.ex.ui.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class EditTestCasePage extends BasePage {
+public class EditCasesPage extends BasePage {
 
     private final By addStepButton = By
             .xpath("//span[@class='pull-right']/a[@class='addStep']");
     private final By saveTestCaseButton = By
             .xpath("//button[@id='accept'][contains(.,'Save Test Case')]");
 
-    public EditTestCasePage(WebDriver webDriver) {
+    public EditCasesPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public EditTestCasePage clickOnAddStep() {
+    public EditCasesPage clickOnAddStep() {
         findElementCustom(webDriver, addStepButton).click();
         return this;
     }

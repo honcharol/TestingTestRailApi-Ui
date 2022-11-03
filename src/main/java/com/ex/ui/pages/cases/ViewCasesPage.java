@@ -9,13 +9,14 @@ import java.util.List;
 
 public class ViewCasesPage extends BasePage {
 
-    private final By testCaseStepList = By.xpath("//span[@class='step-index-inner']");
+    private final By testCaseStepList = By.
+            xpath("//span[@class='step-index-inner']");
 
     public ViewCasesPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public int getTestCaseQuantity(){
+    public int getStepQuantity() {
         int stepsQuantity = 0;
         List<WebElement> stepList;
         try {

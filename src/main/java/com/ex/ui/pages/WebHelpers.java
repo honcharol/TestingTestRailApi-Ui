@@ -13,22 +13,23 @@ import java.util.List;
 public class WebHelpers {
 
     long timeOut = 5L;
-    protected WebElement findElementCustom (WebDriver webDriver, By locator) {
+
+    protected WebElement findElementCustom(WebDriver webDriver, By locator) {
         return new WebDriverWait(webDriver, Duration.ofSeconds(timeOut))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    protected List<WebElement> findElementsCustom (WebDriver webDriver, By locator) {
-        return  new WebDriverWait(webDriver, Duration.ofSeconds(timeOut))
+    protected List<WebElement> findElementsCustom(WebDriver webDriver, By locator) {
+        return new WebDriverWait(webDriver, Duration.ofSeconds(timeOut))
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
-    public WebElement waitForElementToBeClickable (WebDriver webDriver, By locator) {
+    public WebElement waitForElementToBeClickable(WebDriver webDriver, By locator) {
         return new WebDriverWait(webDriver, Duration.ofSeconds(timeOut))
                 .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-    public void scrollToElement (WebDriver webDriver, WebElement webElement) {
+    public void scrollToElement(WebDriver webDriver, WebElement webElement) {
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true)", webElement);
     }
 
