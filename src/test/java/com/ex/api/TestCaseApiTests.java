@@ -26,7 +26,7 @@ public class TestCaseApiTests {
 
     @Test
     public void createNewTestCaseWithoutSteps() {
-        int sectionId = 1;
+        int sectionId = 2;
 
         String expectedCaseName = "New test case" + new Timestamp(System.currentTimeMillis());
 

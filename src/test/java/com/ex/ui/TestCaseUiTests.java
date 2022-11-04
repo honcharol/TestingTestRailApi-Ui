@@ -13,7 +13,7 @@ public class TestCaseUiTests extends BaseTest {
 
     @Test
     public void updateTestCaseByAddingSteps(){
-        String testCaseId = "13";
+        String testCaseId = "18";
         String sectionId = "1";
 
         int existingStepQuantity =
@@ -32,16 +32,16 @@ public class TestCaseUiTests extends BaseTest {
 
     @Test
     public void createDefaultTestCase() {
-        String testCaseSuite = String.valueOf(3);
+        String testCaseSuite = "3";
         String testCaseName = "Some test case - " + System.currentTimeMillis();
-        String testCasesTab = "//a[@id='navigation-suites'][contains(.,'Test Cases')]";
+        String tabName = "suites";
 
         boolean actualTestCaseName = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new AddCasePage(webDriver))
                 .enterTestCaseName(testCaseName)
                 .clickOnAddCaseButton()
-                .clickOnTab(new ViewSuitesPage(webDriver), testCasesTab)
+                .clickOnTab(new ViewSuitesPage(webDriver), tabName)
                 .verifyIfExistTestCaseInList(testCaseName);
 
         assertThat(actualTestCaseName).isEqualTo(true);
