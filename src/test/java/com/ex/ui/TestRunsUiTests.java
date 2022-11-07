@@ -33,7 +33,7 @@ public class TestRunsUiTests extends BaseTest {
 
     @Test
     public void addResultToTestCase() {
-        String testRunId = "21";
+        String testRunId = "22";
         String comment = LogicHelper.randomString(10);
         String statusName = new ViewTestsPage(webDriver).getRandomTstStatus();
 

@@ -30,7 +30,7 @@ public class TestCaseUiEndToEndTests extends BaseTest {
         String suiteId = jsonObject.get("suite_id").toString();
         String caseId = jsonObject.get("id").toString();
 
-        String actualTestCaseName = new LoginPage(webDriver, pr.prop("viewSuiteCasesUri").concat(suiteId))
+        String actualTestCaseName = new LoginPage(webDriver, pr.prop("viewSuiteCases").concat(suiteId))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new ViewSuitesPage(webDriver))
                 .getActualName(caseId);
@@ -43,7 +43,7 @@ public class TestCaseUiEndToEndTests extends BaseTest {
         String testCaseId = "14";
         int stepsQuantity = 4;
 
-        int initialCountSteps = new LoginPage(webDriver, pr.prop("viewTestCasesUri").concat(testCaseId))
+        int initialCountSteps = new LoginPage(webDriver, pr.prop("viewTestCases").concat(testCaseId))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new ViewCasesPage(webDriver))
                 .getStepQuantity();

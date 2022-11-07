@@ -17,7 +17,7 @@ public class TestCaseUiTests extends BaseTest {
         String sectionId = "1";
 
         int existingStepQuantity =
-                new LoginPage(webDriver, pr.prop("editTestCaseUri").concat(testCaseId+"/"+sectionId))
+                new LoginPage(webDriver, pr.prop("editTestCase").concat(testCaseId+"/"+sectionId))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new ViewCasesPage(webDriver))
                 .getStepQuantity();
@@ -36,7 +36,7 @@ public class TestCaseUiTests extends BaseTest {
         String testCaseName = "Some test case - " + System.currentTimeMillis();
         String tabName = "suites";
 
-        boolean actualTestCaseName = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
+        boolean actualTestCaseName = new LoginPage(webDriver, pr.prop("addTestCase").concat(testCaseSuite))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new AddCasePage(webDriver))
                 .enterTestCaseName(testCaseName)
@@ -52,7 +52,7 @@ public class TestCaseUiTests extends BaseTest {
         String testCaseSuite = "3";
         String errorMassage = "Field Title is a required field.";
 
-        String actualMassage = new LoginPage(webDriver, pr.prop("addTestCaseUri").concat(testCaseSuite))
+        String actualMassage = new LoginPage(webDriver, pr.prop("addTestCase").concat(testCaseSuite))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
                 .clickOnLoginButton(new AddCasePage(webDriver))
                 .clickOnAddCaseButton()
