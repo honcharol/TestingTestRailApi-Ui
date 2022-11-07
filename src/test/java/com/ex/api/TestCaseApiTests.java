@@ -16,7 +16,7 @@ public class TestCaseApiTests {
 
     @Test
     public void unableCreateTestCaseWithWrongName(){
-        int sectionId = 9;
+        int sectionId = 1;
         String expectedCaseName = "";
 
         int actualStatusCode = (int) testCaseRequests
@@ -26,7 +26,7 @@ public class TestCaseApiTests {
 
     @Test
     public void createNewTestCaseWithoutSteps() {
-        int sectionId = 2;
+        int sectionId = 1;
 
         String expectedCaseName = "New test case" + new Timestamp(System.currentTimeMillis());
 
@@ -38,7 +38,7 @@ public class TestCaseApiTests {
     @Test
     public void updateTestCaseAddSteps() {
         int expectedStepsQuantity = 3;
-        int testCaseId = 21;
+        int testCaseId = 10;
 
         ArrayList<Map<String, String>> list = new ArrayList<>();
         for (int i=0; i<expectedStepsQuantity; i++){

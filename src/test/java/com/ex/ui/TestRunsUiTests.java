@@ -13,7 +13,7 @@ public class TestRunsUiTests extends BaseTest {
 
     @Test
     public void createTestRunWithSpecificTestCase() {
-        String suiteId = "3";
+        String suiteId = "1";
         String successMassage = "Successfully added the new test run.";
         String testRunName = "Some Test Run: " + System.currentTimeMillis();
 
@@ -33,7 +33,7 @@ public class TestRunsUiTests extends BaseTest {
 
     @Test
     public void addResultToTestCase() {
-        String testRunId = "22";
+        String testRunId = "4";
         String comment = LogicHelper.randomString(10);
         String statusName = new ViewTestsPage(webDriver).getRandomTstStatus();
 

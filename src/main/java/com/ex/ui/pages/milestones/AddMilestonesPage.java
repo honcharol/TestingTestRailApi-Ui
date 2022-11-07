@@ -15,9 +15,7 @@ public class AddMilestonesPage extends BasePage {
     private final By addMilestoneButton = By
             .xpath("//button[@id='accept']");
     private final By browseFiles = By
-            .xpath("//div[@id='entityAttachmentListEmptyIcon']");
-    private final By addNewButton = By
-            .xpath("//a[@id='libraryAddAttachment']");
+            .xpath("//div[contains(@class,'icon-markdown-image')]");
     private final By attachButton = By
             .xpath("//button[@id='attachmentNewSubmit']");
 
@@ -25,40 +23,41 @@ public class AddMilestonesPage extends BasePage {
         super(webDriver);
     }
 
-    public AddMilestonesPage enterMilestoneName(String name){
+    public AddMilestonesPage enterMilestoneName(String name) {
         findElementCustom(webDriver, nameRow).sendKeys(name);
         return this;
     }
 
-    public AddMilestonesPage enterDescription(String description){
+    public AddMilestonesPage enterDescription(String description) {
         findElementCustom(webDriver, descriptionArea).sendKeys(description);
         return this;
     }
 
-    public AddMilestonesPage clickAttachFile(){
+    public AddMilestonesPage uploadFile(String filePath) {
+        String js = "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';";
+        WebElement elem = webDriver.findElement(By.xpath("(//input[contains(@type,'file')])[3]"));
+        ((JavascriptExecutor) webDriver).executeScript(js, elem);
+        elem.sendKeys(filePath);
+
+        return this;
+    }
+
+    public AddMilestonesPage clickOnPlusToAttachFile() {
         findElementCustom(webDriver, browseFiles).click();
         return this;
     }
 
-    public AddMilestonesPage addNewFile(){
-        String js = "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';";
-        WebElement elem = webDriver.findElement(By.xpath("(//input[contains(@type,'file')])[3]"));
-        ((JavascriptExecutor) webDriver).executeScript(js, elem);
-        elem.sendKeys("/home/oleh/Pictures/7049a6e74d678ab6f3a3ccd11117d3f7.jpg");
+    public AddMilestonesPage clickAttachButton() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+            findElementCustom(webDriver, attachButton).click();
         return this;
     }
 
-    public AddMilestonesPage chooseFile(){
-
-        return this;
-    }
-
-    public AddMilestonesPage clickAttachButton(){
-        findElementCustom(webDriver, attachButton).click();
-        return this;
-    }
-
-    public void clickAddMilestoneButton(){
+    public void clickAddMilestoneButton() {
         findElementCustom(webDriver, addMilestoneButton).click();
     }
 }

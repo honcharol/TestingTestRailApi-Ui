@@ -10,8 +10,9 @@ public class MilestonesUiTests extends BaseTest{
     @Test
     public void createMilestoneWithAttachedFile(){
         PropertyReader pr = new PropertyReader();
-        String projectId = "6";
+        String projectId = "1";
         String milestoneName = "This is new MILE " + System.currentTimeMillis();
+        String filePath = "/home/oleh/Downloads/TestRail-actions-14-20221019171358.csv";
         String description = LogicHelper.randomString(15);
 
         new LoginPage(webDriver, pr.prop("addMilestones").concat(projectId))
@@ -19,9 +20,8 @@ public class MilestonesUiTests extends BaseTest{
                 .clickOnLoginButton(new AddMilestonesPage(webDriver))
                 .enterMilestoneName(milestoneName)
                 .enterDescription(description)
-                .clickAttachFile()
-                .addNewFile()
-                .chooseFile()
+                .clickOnPlusToAttachFile()
+                .uploadFile(filePath)
                 .clickAttachButton()
                 .clickAddMilestoneButton();
     }
