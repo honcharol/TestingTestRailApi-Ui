@@ -38,7 +38,6 @@ public class AddMilestonesPage extends BasePage {
         WebElement elem = webDriver.findElement(By.xpath("(//input[contains(@type,'file')])[3]"));
         ((JavascriptExecutor) webDriver).executeScript(js, elem);
         elem.sendKeys(filePath);
-
         return this;
     }
 
