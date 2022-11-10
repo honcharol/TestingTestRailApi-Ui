@@ -12,7 +12,7 @@ public class MilestonesUiTests extends BaseTest{
         PropertyReader pr = new PropertyReader();
         String projectId = "1";
         String milestoneName = "This is new MILE " + System.currentTimeMillis();
-        String filePath = "/home/oleh/Downloads/TestRail-actions-14-20221019171358.csv";
+        String filePath = "/home/oleh/Downloads/TestRail-actions-14-20221019171358.csv ";
         String description = LogicHelper.randomString(15);
 
         new LoginPage(webDriver, pr.prop("addMilestones").concat(projectId))
