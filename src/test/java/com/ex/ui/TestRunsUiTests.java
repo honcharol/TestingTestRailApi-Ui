@@ -2,17 +2,18 @@ package com.ex.ui;
 
 import com.ex.ui.pages.LoginPage;
 import com.ex.ui.pages.runs.AddRunsPage;
-import com.ex.ui.pages.runs.OverviewRunsPage;
+import com.ex.ui.pages.runs.ViewRunsPage;
+import com.ex.ui.pages.runs.ViewTestsPage;
+import com.ex.utils.LogicHelper;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class TestRunsUiTests extends BaseTest {
 
     @Test
     public void createTestRunWithSpecificTestCase() {
-        String suiteId = "3";
+        String suiteId = "1";
         String successMassage = "Successfully added the new test run.";
         String testRunName = "Some Test Run: " + System.currentTimeMillis();
 
@@ -22,7 +23,7 @@ public class TestRunsUiTests extends BaseTest {
                 .enterTestRunName(testRunName)
                 .clickOnSelectSpecificTestCasesRadioButton()
                 .clickOnChangeSelection()
-                .clickOnRandomTestCases()
+                .chooseRandomScopeOfTestCases()
                 .clickOnOkButton()
                 .clickOnAddTestRunButton()
                 .getSuccessMassage();
@@ -32,20 +33,21 @@ public class TestRunsUiTests extends BaseTest {
 
     @Test
     public void addResultToTestCase() {
-        String projectId = "6";
+        String testRunId = "4";
+        String comment = LogicHelper.randomString(10);
+        String statusName = new ViewTestsPage(webDriver).getRandomTstStatus();
 
-        String nameOfTestStatus = new LoginPage(webDriver, pr.prop("overviewRuns").concat(projectId))
+        String testStatus = new LoginPage(webDriver, pr.prop("viewRuns").concat(testRunId))
                 .fillCredential(pr.prop("email"), pr.prop("password"))
-                .clickOnLoginButton(new OverviewRunsPage(webDriver))
-                .clickOnRandomTestRun()
+                .clickOnLoginButton(new ViewRunsPage(webDriver))
                 .clickOnRandomTestCase()
                 .clickAddResultButton()
                 .clickOnStatusDropDown()
-                .clickOnRandomStatus()
+                .clickOnTestStatus(statusName)
+                .fillCommentToResult(comment)
                 .clickOnAddResult()
-                .nameOfTestStatus();
+                .nameOfTestStatus(comment);
 
-        assertThat(nameOfTestStatus).isNotEqualTo("Untested");
-
+        assertThat(testStatus).isEqualTo(statusName);
     }
 }

@@ -1,12 +1,12 @@
 package com.ex.ui.pages;
 
-import com.ex.ui.PropertyReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage extends WebHelpers {
 
+    private final String tab = "//a[@id='navigation-%s']";
     protected WebDriver webDriver;
 
     public BasePage(WebDriver webDriver) {
@@ -20,8 +20,8 @@ public abstract class BasePage extends WebHelpers {
         PageFactory.initElements(webDriver, this);
     }
 
-    public <T> T clickOnTab(T type, String locator) {
-        findElementCustom(webDriver, By.xpath(locator)).click();
+    public <T> T clickOnTab(T type, String tabName) {
+        findElementCustom(webDriver, By.xpath(String.format(tab, tabName))).click();
         return type;
     }
 

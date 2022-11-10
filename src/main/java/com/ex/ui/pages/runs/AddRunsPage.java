@@ -43,7 +43,7 @@ public class AddRunsPage extends BasePage {
         return this;
     }
 
-    public AddRunsPage clickOnRandomTestCases() {
+    public AddRunsPage chooseRandomScopeOfTestCases() {
         Random rnd = new Random();
         List<WebElement> listCases = findElementsCustom(webDriver, testCasesList);
 
