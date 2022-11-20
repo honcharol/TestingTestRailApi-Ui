@@ -13,7 +13,7 @@ public class TestCaseUiTests extends BaseTest {
 
     @Test
     public void updateTestCaseByAddingSteps(){
-        String testCaseId = "18";
+        String testCaseId = "5";
         String sectionId = "1";
 
         int existingStepQuantity =
@@ -49,7 +49,7 @@ public class TestCaseUiTests extends BaseTest {
 
     @Test
     public void unableToCreateTestCaseWithEmptyTitle(){
-        String testCaseSuite = "3";
+        String testCaseSuite = "1";
         String errorMassage = "Field Title is a required field.";
 
         String actualMassage = new LoginPage(webDriver, pr.prop("addTestCase").concat(testCaseSuite))
