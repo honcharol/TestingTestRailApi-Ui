@@ -32,7 +32,7 @@ public class TestCaseUiTests extends BaseTest {
 
     @Test
     public void createDefaultTestCase() {
-        String testCaseSuite = "3";
+        String testCaseSuite = "1";
         String testCaseName = "Some test case - " + System.currentTimeMillis();
         String tabName = "suites";
 
@@ -44,7 +44,7 @@ public class TestCaseUiTests extends BaseTest {
                 .clickOnTab(new ViewSuitesPage(webDriver), tabName)
                 .verifyIfExistTestCaseInList(testCaseName);
 
-        assertThat(actualTestCaseName).isEqualTo(true);
+        assertThat(actualTestCaseName).as("case not appeared in the list").isEqualTo(true);
     }
 
     @Test

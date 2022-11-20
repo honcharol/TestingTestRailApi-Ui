@@ -14,6 +14,7 @@ public class AddCasePage extends BasePage {
             .xpath("//div[@class='message message-error'][contains(.,'Field Title is a required field.')]");
 
 
+
     public AddCasePage(WebDriver webDriver) {
         super(webDriver);
     }
